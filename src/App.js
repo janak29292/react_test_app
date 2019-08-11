@@ -8,6 +8,7 @@ class App extends Component {
     name: '',
     image: null,
     token: '',
+    value: []
   };
 
   handleChange = (e) => {
@@ -15,6 +16,12 @@ class App extends Component {
       [e.target.id]: e.target.value
     })
   };
+
+  handleSelectChange = (e) => {
+    this.setState({
+      [e.target.id]: Array.from(e.target.selectedOptions, (item) => item.value)
+    });
+  }
 
   handleImageChange = (e) => {
     this.setState({
@@ -55,6 +62,14 @@ class App extends Component {
             <input type="file"
                    id="image"
                    accept="image/png, image/jpeg"  onChange={this.handleImageChange} required/>
+          </p>
+          <p>
+            <select multiple={true} id='value' value={this.state.value} onChange={this.handleSelectChange}>
+              <option value="grapefruit">Grapefruit</option>
+              <option value="lime">Lime</option>
+              <option value="coconut">Coconut</option>
+              <option value="mango">Mango</option>
+            </select>
           </p>
           <input type="submit"/>
         </form>
