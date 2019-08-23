@@ -5,6 +5,7 @@ import axios from 'axios';
 class App extends Component {
 
   state = {
+    id : '',
     name: '',
     doc: null,
     image1: null,
@@ -49,8 +50,8 @@ class App extends Component {
     form_data.append("cta", "coverage")
     form_data.append('content', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
     form_data.append('availability', 'regular')
-    let url = 'http://localhost:8000/api/pitch/';
-    axios.post(url, form_data, {
+    let url = 'http://localhost:8000/api/pitch/'+ this.state.id + '/';
+    axios.patch(url, form_data, {
       headers: {
         'content-type': 'multipart/form-data',
         'Authorization' : 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InByQGdtYWlsLmNvbSIsImV4cCI6MTU2ODE4ODc0MywiZW1haWwiOiJwckBnbWFpbC5jb20iLCJvcmlnX2lhdCI6MTU2NTU5Njc0M30.-FdcW4L26_xGRDhSEXRxXDxPjaEVnErJtsXrfhfwoiw'
@@ -66,6 +67,9 @@ class App extends Component {
     return (
       <div className="App">
         <form onSubmit={this.handleSubmit}>
+          <p>
+            <input type="text" placeholder='ID' id='id' value={this.state.id} onChange={this.handleChange} required/>
+          </p>
           <p>
             <input type="text" placeholder='Title' id='name' value={this.state.name} onChange={this.handleChange} required/>
           </p>
